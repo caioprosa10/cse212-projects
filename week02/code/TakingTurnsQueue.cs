@@ -49,7 +49,7 @@ public class TakingTurnsQueue
                 person.Turns -= 1;
                 _people.Enqueue(person);
             }
-            // Pessoas com 0 ou menos turnos têm turnos infinitos
+            // People with 0 or less turns have infinite turns
             else if (person.Turns <= 0)
             {
                 _people.Enqueue(person);

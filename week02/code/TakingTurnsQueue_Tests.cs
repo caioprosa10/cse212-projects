@@ -12,7 +12,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: NENHUM DEFEITO ENCONTRADO. O código original já lidava corretamente com turnos finitos (maiores que 0).
+    // Defect(s) Found: No defect found. The original code already handled finite turns (greater than 0) correctly.
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -44,7 +44,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3)
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
-    // Defect(s) Found: NENHUM DEFEITO ENCONTRADO.
+    // Defect(s) Found: No defect found. Adding a player mid-way worked correctly.
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -86,7 +86,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: Quando os turnos são 0, o código antigo não reinseria a pessoa na fila. Tim não voltava para a fila após ser chamado.
+    // Defect(s) Found: When a person had 0 turns (infinite), the original code failed to re-enqueue them. Tim was removed from the queue after his first turn.
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -117,7 +117,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
-    // Defect(s) Found: Assim como no caso do zero, valores negativos não reinseriam a pessoa na fila. Tim sumia na primeira rodada.
+    // Defect(s) Found: Similar to the zero turns scenario, when a person had negative turns, the code failed to re-enqueue them. They were permanently removed after one turn.
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
@@ -144,7 +144,7 @@ public class TakingTurnsQueueTests
     [TestMethod]
     // Scenario: Try to get the next person from an empty queue
     // Expected Result: Exception should be thrown with appropriate error message.
-    // Defect(s) Found: NENHUM DEFEITO ENCONTRADO. A exceção correta já estava sendo lançada.
+    // Defect(s) Found: No defect found. The correct exception was already being thrown.
     public void TestTakingTurnsQueue_Empty()
     {
         var players = new TakingTurnsQueue();

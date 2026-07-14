@@ -7,9 +7,9 @@ using System;
 public class PriorityQueueTests
 {
     [TestMethod]
-    // Scenario: Adicionar três itens com prioridades diferentes e retirá-los.
-    // Expected Result: Devem sair na ordem: maior prioridade primeiro.
-    // Defect(s) Found: O código antigo não removia os itens da lista e não testava o último elemento.
+    // Scenario: Add three items with different priorities and dequeue them.
+    // Expected Result: They should be dequeued in order of highest priority first.
+    // Defect(s) Found: The original code did not check the last item in the queue because the loop condition was `_queue.Count - 1`. Also, the dequeued item was never actually removed from the list.
     public void TestPriorityQueue_HighestPriorityRemoved()
     {
         var priorityQueue = new PriorityQueue();
@@ -17,18 +17,18 @@ public class PriorityQueueTests
         priorityQueue.Enqueue("Alta", 10);
         priorityQueue.Enqueue("Media", 5);
 
-        // O item com prioridade 10 deve sair primeiro
+        // The item with priority 10 should come out first
         Assert.AreEqual("Alta", priorityQueue.Dequeue());
-        // Depois o item com prioridade 5
+        // Then the item with priority 5
         Assert.AreEqual("Media", priorityQueue.Dequeue());
-        // Depois o item com prioridade 1
+        // Then the item with priority 1
         Assert.AreEqual("Baixa", priorityQueue.Dequeue());
     }
 
     [TestMethod]
-    // Scenario: Adicionar itens com a MESMA prioridade.
-    // Expected Result: Devem sair na ordem em que foram adicionados (FIFO).
-    // Defect(s) Found: O código original usava ">=" e acabava tirando o último a entrar em vez do primeiro em caso de empate de prioridade.
+    // Scenario: Add items with the SAME priority.
+    // Expected Result: They should be dequeued in the order they were added (FIFO).
+    // Defect(s) Found: The original code used ">=" instead of ">" when comparing priorities. This caused it to return the newest item instead of the oldest one when priorities were tied, breaking the FIFO rule.
     public void TestPriorityQueue_FIFOOnTie()
     {
         var priorityQueue = new PriorityQueue();
@@ -42,9 +42,9 @@ public class PriorityQueueTests
     }
 
     [TestMethod]
-    // Scenario: Tentar dar dequeue em uma fila vazia.
-    // Expected Result: Lançar InvalidOperationException com a mensagem correta.
-    // Defect(s) Found: NENHUM DEFEITO ENCONTRADO. Já funcionava corretamente.
+    // Scenario: Try to dequeue from an empty queue.
+    // Expected Result: Should throw an InvalidOperationException with the correct message.
+    // Defect(s) Found: No defect found. The original code already threw the correct exception.
     public void TestPriorityQueue_EmptyThrowsException()
     {
         var priorityQueue = new PriorityQueue();

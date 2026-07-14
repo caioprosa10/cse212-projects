@@ -28,10 +28,10 @@ public class PriorityQueue
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
         
-        // Loop vai até o final da fila (sem o - 1)
+        // Loop goes until the end of the queue (removed the - 1)
         for (int index = 1; index < _queue.Count; index++)
         {
-            // Usa apenas ">" para respeitar o FIFO em caso de empate
+            // Only use ">" to respect FIFO in case of a tie
             if (_queue[index].Priority > _queue[highPriorityIndex].Priority)
             {
                 highPriorityIndex = index;
@@ -41,7 +41,7 @@ public class PriorityQueue
         // Remove and return the item with the highest priority
         var value = _queue[highPriorityIndex].Value;
         
-        // Remove efetivamente o item da fila
+        // Actually removes the item from the queue
         _queue.RemoveAt(highPriorityIndex); 
         
         return value;
